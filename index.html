@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaWave · media rich landing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f4f7fc;
+            color: #172b3a;
+            line-height: 1.5;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-wrap {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(2px);
+            border-radius: 3rem 3rem 2rem 2rem;
+            box-shadow: 0 25px 45px -20px rgba(0,30,50,0.3);
+            padding: 2.5rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, #0b2d47, #264e6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #3f5567;
+            border-left: 5px solid #3f8ab3;
+            padding-left: 1.3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ---------- MEDIA SECTIONS ---------- */
+        .media-block {
+            margin: 3rem 0 4rem 0;
+        }
+
+        .media-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .video-container {
+            flex: 2 1 500px;
+            background: #0b1f2b;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 25px 35px -12px rgba(0,30,50,0.5);
+            transition: box-shadow 0.2s;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .audio-container {
+            flex: 1 1 280px;
+            background: #ffffffd6;
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 18px 30px -12px #1e3f5a;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .audio-container h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: #113448;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audio-container p {
+            color: #2f4d66;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        audio {
+            width: 100%;
+            height: 44px;
+            border-radius: 40px;
+            outline: none;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: #e4ecf5;
+        }
+
+        /* ---------- IMAGE GALLERY (grid) ---------- */
+        .gallery-section {
+            margin-top: 4rem;
+        }
+
+        .gallery-section h2 {
+            font-size: 2.2rem;
+            font-weight: 550;
+            color: #1e405b;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.8rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .gallery-item {
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 12px 25px -10px rgba(10, 40, 60, 0.2);
+            transition: all 0.25s ease;
+            aspect-ratio: 1 / 1;
+            border: 2px solid transparent;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02) translateY(-4px);
+            box-shadow: 0 25px 30px -8px #0b3b5b;
+            border-color: #8abddb;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #c9d9e9;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* caption / subtle */
+        .gallery-caption {
+            text-align: center;
+            margin-top: 1rem;
+            color: #2f5570;
+            font-weight: 500;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media screen and (max-width: 950px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .media-row {
+                flex-direction: column;
+            }
+            h1 { font-size: 2.2rem; }
+            .page-wrap { padding: 1.8rem; }
+        }
+
+        @media screen and (max-width: 450px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---------- REFLECTION (styling) ---------- */
+        .reflection-card {
+            background: #d9e6f2d0;
+            backdrop-filter: blur(4px);
+            margin-top: 4rem;
+            padding: 2.2rem 2.2rem;
+            border-radius: 40px 20px 40px 20px;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .reflection-card h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0e334b;
+            margin-bottom: 1.2rem;
+        }
+
+        .reflection-card p {
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            line-height: 1.6;
+        }
+
+        .reflection-card strong {
+            color: #09456b;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #7fa9c7, transparent);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrap">
+        <header>
+            <h1>🌊 NovaWave · beyond sound</h1>
+            <div class="subhead">experience the new smart speaker · video, audio & image gallery</div>
+        </header>
+
+        <!-- VIDEO + AUDIO side by side (flex row) -->
+        <section class="media-block">
+            <div class="media-row">
+                <!-- video tag with poster and controls -->
+                <div class="video-container">
+                    <video controls poster="https://images.unsplash.com/photo-1549492867-2c7f9e6739d4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwZWFrZXIlMjBzdHVkaW98ZW58MHx8MHx8fDA%3D" 
+                           aria-label="Promotional video for NovaWave speaker">
+                        <!-- actual video source (small sample from internet) -->
+                        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        <!-- fallback text if video unsupported -->
+                        Your browser does not support the video tag. 
+                        <a href="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4">download the video</a>
+                    </video>
+                </div>
+
+                <!-- audio testimonial -->
+                <div class="audio-container">
+                    <h3>⭐ 4.9 · testimonial</h3>
+                    <p>“ crystal clear, rich bass — blows me away ”</p>
+                    <audio controls aria-label="audio testimonial from customer">
+                        <!-- using a publicly available sample audio (short) -->
+                        <source src="https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand60.wav" type="audio/wav">
+                        <source src="https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav" type="audio/wav">
+                        Your browser doesn’t support the audio element.
+                    </audio>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">— Alex Rivera, early adopter</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMAGE GALLERY grid (4 images, but we add at least 6 inside grid, following instruction "image gallery using img tags inside div grid" – we show 4 distinct images, but we'll add 6 to match showcase style) -->
+        <section class="gallery-section">
+            <h2>📸 gallery · nova family</h2>
+            <div class="gallery-grid">
+                <!-- image 1 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="NovaWave speaker in living room" loading="lazy">
+                </div>
+                <!-- image 2 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589003077984-894e133dabab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="close-up speaker texture" loading="lazy">
+                </div>
+                <!-- image 3 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1619118882422-24feb30ef623?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="NovaWave with ambient light" loading="lazy">
+                </div>
+                <!-- image 4 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1543512214-318c7553f230?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="speaker on wooden desk" loading="lazy">
+                </div>
+                <!-- image 5 – extra for richer grid -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1619096259734-26a7b2bd3f1e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="minimal speaker setup" loading="lazy">
+                </div>
+                <!-- image 6 – one more to have 6 total -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                         alt="NovaWave outdoor" loading="lazy">
+                </div>
+            </div>
+            <div class="gallery-caption">six angles · designed to blend</div>
+        </section>
+
+        <!-- horizontal rule before reflection -->
+        <hr>
+
+        <!-- Reflection questions answered -->
+        <section class="reflection-card">
+            <h3>🧠 reflection · PM-08-PS03</h3>
+            <p><strong>📺 What are the benefits of hosting videos externally (e.g., YouTube embed)?</strong><br>
+            ➜ External hosting (YouTube, Vimeo) saves your own server bandwidth and storage. They handle encoding, adaptive streaming, and deliver via global CDN — faster load for users worldwide. You also get robust analytics, captioning tools, and easy embedding with iframe. Drawback: ads, branding, or potential links to unrelated content. For full control and privacy, self‑hosting (like our <code>&lt;video&gt;</code> tag) is better, but you must optimize files.</p>
+
+            <p><strong>⚡ How do you optimize images for faster page loading?</strong><br>
+            ➜ 1. Choose modern formats like WebP or AVIF (smaller than JPG/PNG). 2. Compress with tools (TinyPNG, Squoosh). 3. Use <code>srcset</code> to serve different sizes based on viewport. 4. Lazy loading with <code>loading="lazy"</code> (as in our gallery). 5. Host on CDN. 6. Set explicit width/height to avoid layout shift. All these reduce bytes and speed up perceived performance.</p>
+
+            <p style="margin-bottom: 0.5rem;"><small>🎯 In this demo: video uses a poster image, audio is external .wav (just for demonstration). For production, compress audio (MP3/ AAC) and use optimized video (h.264/h.265).</small></p>
+        </section>
+
+        <footer style="margin-top: 2rem; text-align: center; color: #3d6079; opacity: 0.9;">
+            NovaWave landing · multimedia with CSS grid/flex · Section C
+        </footer>
+    </div>
+
+    <!-- 
+        notes: 
+        - video source is a sample mp4 from gtv-videos-bucket (big buck bunny style). 
+        - poster image from unsplash (speaker) — shows before play.
+        - audio uses UIC sample wav (short instrumental). 
+        - images from unsplash (relevant to speakers/tech). all external, optimized with q=60 & auto=format.
+        - reflection includes inline answers.
+    -->
+</body>
+</html>
